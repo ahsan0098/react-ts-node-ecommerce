@@ -43,7 +43,7 @@ export const sendmail = (req, res) => {
         if (err) {
             throw new Err('Error while sending email:', err);
         }
-        res.json(info)
+        res.json({ message: "Email sent! Check inbox" })
     });
 }
 /*===========*****===========send email verification===========*****===========*/
@@ -59,13 +59,17 @@ export const verify = async (req, res) => {
     try {
         decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
-        throw new Err("Token Expired or Invalid", 403)
+        return res.redirect(`${process.env.FRONTEND_URL}/admin/profile?error=Token expired or invalid. try sending a new verification email`);
     }
 
     const admin = await Admin.findById(decoded._id);
 
+    if (!admin) {
+        return res.redirect(`${process.env.FRONTEND_URL}/admin/profile?error=This token does not belong to you. Please try correct one`);
+    }
+
     if (admin.verified) {
-        return res.status(200).json({ message: "Email Already Verified." });
+        return res.redirect(`${process.env.FRONTEND_URL}/admin/profile`);
     }
 
     admin.verified = true;
@@ -73,8 +77,9 @@ export const verify = async (req, res) => {
 
     generateToken({ ...admin.toJSON(), role: "admin" }, res);
 
-    return res.status(200).json({ message: "Email Successfully Verified." });
-}
+    return res.redirect(`${process.env.FRONTEND_URL}/admin/profile?success=Email verified successfully`);
+};
+
 /*===========*****===========verify email===========*****===========*/
 
 

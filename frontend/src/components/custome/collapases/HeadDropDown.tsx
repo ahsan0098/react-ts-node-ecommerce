@@ -36,7 +36,7 @@ export const MenuDropdown = ({ menu }: MenuDropdownProps) => {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent
-                align="end"
+                align="start"
                 className="mt-5 hidden w-4xl left-0 lg:flex lg:flex-wrap gap-2 p-4 shadow-lg border z-50 mx-4"
             >
                 {menu.routes.map((route, index) => (

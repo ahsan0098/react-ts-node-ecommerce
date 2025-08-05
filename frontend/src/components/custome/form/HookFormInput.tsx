@@ -31,7 +31,7 @@ const HookFormInput: React.FC<HookFormInputProps> = (props) => {
                                 {...props}
                                 {...field}
                                 id={props.name}
-                                className={`bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  focus:ring-0 focus:outline-none dark:text-white ${hasError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                                className={`bg-gray-50 dark:bg-gray-700 dark:placeholder-gray-400  focus:ring-0 focus:outline-none dark:text-white border ${hasError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
                             />
                             {hasError && (
                                 <AlertCircle className="absolute right-2 top-1/2 -translate-y-1/2 h-5 w-5 text-red-500 pointer-events-none" />

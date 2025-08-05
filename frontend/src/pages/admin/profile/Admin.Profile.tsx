@@ -15,13 +15,34 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { AuthState } from '@/contexts/Global';
+import { useLocation } from "react-router-dom";
 
 const Profile = () => {
 
     const { setAuth, loading, setLoading, auth } = useGlobalContext();
 
+    const location = useLocation();
+    const params = new URLSearchParams(location.search);
+
     const form = useProfileForm({ name: auth.name, email: auth.email });
 
+    const sendmail = async () => {
+        try {
+            setLoading(true);
+
+            const response = await AxiosInstance.get("admin/protected/send-email");
+
+            toast.success(response.data.message);
+
+        } catch (err: any) {
+            console.log(err);
+
+            toast.error(err.response?.data.message);
+
+        } finally {
+            setLoading(false)
+        }
+    }
     const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
 
         try {
@@ -71,6 +92,17 @@ const Profile = () => {
         <>
             <Breadcrumbs pages={{ "Update Your Profile": "#" }} />
             <div className="max-w-3xl mx-auto w-full py-10 px-4 space-y-8">
+                {
+                    params.has('error') && <div className="p-4 border rounded-md bg-red-50">
+                        {params.get('error')}
+                    </div>
+                }
+
+                {
+                    params.get('success') && <div className="p-4 border rounded-md bg-green-50">
+                        {params.get('success')}
+                    </div>
+                }
                 <FormProvider {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
                         <div className="flex items-center gap-4 mb-6">
@@ -88,46 +120,70 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="space-y-6 text-start">
 
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {
-                                    loading ? <InputLabelSkeleton cols={2} />
+                        {
+                            auth.verified ?
+                                <div className="space-y-6 text-start">
+
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        {
+                                            loading ? <InputLabelSkeleton cols={2} />
+                                                :
+                                                <>
+                                                    <HookFormInput name="name" placeholder="your full name" type="text" />
+                                                    <HookFormInput name="email" placeholder="you@example.com" type="email" />
+                                                </>
+                                        }
+                                    </div>
+
+                                    {loading ?
+                                        <LineSkeleton size="p-4" />
                                         :
-                                        <>
-                                            <HookFormInput name="name" placeholder="your full name" type="text" />
-                                            <HookFormInput name="email" placeholder="you@example.com" type="email" />
-                                        </>
-                                }
-                            </div>
+                                        <h5 className="p-3 text-sm border border-blue-400 rounded-md">Don't use password and confirm password field unless you want to update password</h5>
+                                    }
 
-                            {loading ?
-                                <LineSkeleton size="p-4" />
+                                    <div className="grid md:grid-cols-2 gap-6">
+                                        {
+                                            loading ? <InputLabelSkeleton cols={2} />
+                                                :
+                                                <>
+                                                    <HookFormInput name="current_password" placeholder="you@example.com" type="password" />
+                                                    <HookFormInput name="new_password" placeholder="you@example.com" type="password" />
+                                                </>
+                                        }
+                                    </div>
+
+                                    <div className="flex justify-end">
+                                        {
+                                            loading
+                                                ?
+                                                <Button type="button" disabled>Saving...<Loader2 className="animate-spin" /></Button>
+                                                :
+                                                <Button type="submit">Save Changes</Button>
+                                        }
+                                    </div>
+                                </div>
                                 :
-                                <h5 className="p-3 text-sm border border-blue-400 rounded-md">Don't use password and confirm password field unless you want to update password</h5>
-                            }
+                                <div className="p-4 border rounded-md">
+                                    <p className="text-start">
+                                        Your email is not verified. You are restricted to perform your tasks until you verify you email. Please click
+                                        {
+                                            loading ?
+                                                <Button type="button" variant="link" className="p-2 underline" disabled>
+                                                    Sending...<Loader2 className="animate-spin" />
+                                                </Button>
+                                                :
+                                                <Button type="button" variant="link" onClick={sendmail} className="p-2 underline" >Verify Now</Button>
+                                        }
 
-                            <div className="grid md:grid-cols-2 gap-6">
-                                {
-                                    loading ? <InputLabelSkeleton cols={2} />
-                                        :
-                                        <>
-                                            <HookFormInput name="current_password" placeholder="you@example.com" type="password" />
-                                            <HookFormInput name="new_password" placeholder="you@example.com" type="password" />
-                                        </>
-                                }
-                            </div>
 
-                            <div className="flex justify-end">
-                                {
-                                    loading
-                                        ?
-                                        <Button type="button" disabled>Saving...<Loader2 className="animate-spin" /></Button>
-                                        :
-                                        <Button type="submit">Save Changes</Button>
-                                }
-                            </div>
-                        </div>
+                                        to receive verification email. Thanks :)
+                                    </p>
+
+
+                                </div>
+                        }
+
                     </form>
                 </FormProvider>
             </div>

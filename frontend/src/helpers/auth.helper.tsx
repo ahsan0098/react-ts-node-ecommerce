@@ -1,7 +1,7 @@
 /*===========*****===========imports===========*****===========*/
 import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState, type ReactNode } from "react";
-import { Loader } from "lucide-react"
+import { Loader2 } from "lucide-react"
 import useGlobalContext from "@/hooks/UseContext";
 import { AxiosInstance } from "@/lib/axios.helper";
 /*===========*****===========imports===========*****===========*/
@@ -41,7 +41,7 @@ const Authenticated: React.FC<AuthenticatedProps> = ({ guard, children }) => {
 
     return loading ? (
         <div className="flex items-center justify-center h-screen">
-            <Loader className="size-10 animate-spin" />
+            <Loader2 className="size-20 animate-spin" />
         </div>
     ) : <>{children}</>;
 };

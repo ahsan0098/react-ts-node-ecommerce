@@ -24,7 +24,7 @@ router.get("/protected/send-email", Authenticated("admin"), profile.sendmail);
 /*===========*****===========profile===========*****===========*/
 
 /*===========*****===========profile===========*****===========*/
-router.get("/protected/verify-email", Authenticated("admin"), profile.verify);
+router.get("/protected/verify-email", profile.verify);
 /*===========*****===========profile===========*****===========*/
 
 /*===========*****===========profile===========*****===========*/

@@ -7,7 +7,7 @@ import { Toaster } from './components/ui/sonner'
 function App() {
 
   return (
-    <div className="max-w-full bg-gray-50 dark:bg-white text-gray-900 dark:text-gray-100 text-sm">
+    <div className="max-w-full bg-gray-50 dark:bg-white text-gray-900 dark:text-gray-100 text-sm dark:border-gray-600 border-gray-900">
 
       <GlobalContextApi>
         <RouterProvider router={AppRouter} />

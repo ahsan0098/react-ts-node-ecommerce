@@ -8,10 +8,12 @@ import Tr from "@/components/custome/table/Tr"
 import { Button } from "@/components/ui/button"
 import useGlobalContext from "@/hooks/UseContext"
 import { RefreshCw, Search, UserPlusIcon } from "lucide-react"
+import { useEffect } from "react"
 
 const AllAdmins = () => {
     const { loading, setLoading, auth } = useGlobalContext();
 
+    // useEffect(())
     return (
         <div>
             <Breadcrumbs pages={{ "Site Admins List": "#" }} />
@@ -61,7 +63,13 @@ const AllAdmins = () => {
                             <Td>Ahsan</Td>
                             <Td>Ahsan</Td>
                         </Tr>
-                       
+                        <Tr>
+                            <Td>Ahsan</Td>
+                            <Td>Ahsan</Td>
+                            <Td>Ahsan</Td>
+                            <Td>Ahsan</Td>
+                            <Td>Ahsan</Td>
+                        </Tr>
                     </TBody>
                 </TableLayout>
 
@@ -71,3 +79,12 @@ const AllAdmins = () => {
 }
 
 export default AllAdmins
+
+
+export interface AdminStruct {
+    _id: string,
+    name: string,
+    email: string,
+    image: string,
+    verified: boolean
+}
