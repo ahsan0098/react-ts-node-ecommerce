@@ -1,7 +1,7 @@
 /*===========*****===========resolver pagination===========*****===========*/
 const pager = async (totalPages, currentPage, path) => {
     const links = {
-        page: currentPage,
+        page: `${process.env.APP_URL}/api/v1/${path}?page=${currentPage}`,
         links: {},
         prev: null,
         next: null,

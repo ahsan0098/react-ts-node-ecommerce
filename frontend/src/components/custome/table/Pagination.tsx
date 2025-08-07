@@ -1,21 +1,51 @@
+import type { CollectionMeta } from "@/models/collection.interface";
 
-interface Page { link: string, url: string, label: string, active: boolean }
 
-interface Pagination { links: Page[], callback: CallableFunction }
 
-const Pagination = ({ links, callback }: Pagination) => {
-  return (
-    <div className='flex px-5 py-3 text-gray-700 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700'>
-      {links.map((link: Page, index: number) => (
-        <button
-          key={index}
-          className={`px-3 inline-flex items-center text-xs font-medium hover:text-blue-600  dark:hover:text-white ${link.active ? 'font-bold text-blue-500' : 'text-gray-700 dark:text-gray-400'} ${link.url ? '' : 'hidden'}`}
-          onClick={() => callback(link.url)}
-          dangerouslySetInnerHTML={{ __html: link.label }}
-        />
-      ))}
-    </div>
-  )
+
+interface PaginationProps {
+  meta: CollectionMeta;
+  callback: (url: string) => void;
 }
 
-export default Pagination
+const Pagination = ({ meta, callback }: PaginationProps) => {
+
+  return (meta.prev || meta.next) ? (
+    <div className="flex py-3 justify-end">
+
+      {meta.prev && (
+        <button
+          className="px-3 py-1 text-xs font-medium text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+          onClick={() => callback(meta.prev!)}
+        >
+          &laquo; Prev
+        </button>
+      )}
+
+
+      {Object.entries(meta.links).map(([pageNum, url]) => (
+        <button
+          key={pageNum}
+          className={`px-3 py-1 text-xs font-medium rounded ${meta.page === url
+            ? 'font-bold text-blue-500'
+            : 'text-gray-700 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white'
+            }`}
+          onClick={() => callback(url)}
+        >
+          {pageNum}
+        </button>
+      ))}
+
+      {meta.next && (
+        <button
+          className="px-3 py-1 text-xs font-medium text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white"
+          onClick={() => callback(meta.next!)}
+        >
+          Next &raquo;
+        </button>
+      )}
+    </div>
+  ) : <></>;
+};
+
+export default Pagination;

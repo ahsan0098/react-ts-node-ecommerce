@@ -1,7 +1,9 @@
-import type { ReactNode } from "react"
+import type { ReactNode, TableHTMLAttributes } from "react"
 
-interface Td { children: ReactNode }
-const Td = ({ children }: Td) => {
+interface TdProps extends TableHTMLAttributes<HTMLTableDataCellElement> {
+    children: ReactNode
+}
+const Td = ({ children }: TdProps) => {
     return (
         <td scope="col" className="px-6 py-3">
             {children}

@@ -4,7 +4,7 @@ import Setting from "../../models/setting.model.js";
 /*===========*****===========imports===========*****===========*/
 
 /*===========*****===========init===========*****===========*/
-const cache = new NodeCache({ stdTTL: 3600 }); // 1 hour TTL
+const cache = new NodeCache({ stdTTL: 3600 });
 /*===========*****===========init===========*****===========*/
 
 

@@ -1,7 +1,7 @@
-import { HOME_URL, ADMIN_PROFILE_URL, ADMIN_SETTINGS_URL, ADMIN_LOGIN_URL, SERVER_PATH } from '@/constants/paths'
+import { HOME_URL, ADMIN_PROFILE_URL, ADMIN_SETTINGS_URL, ADMIN_LOGIN_URL, SERVER_PATH, ADMIN_ADMINS_URL } from '@/constants/paths'
 import { Link, useNavigate } from 'react-router-dom'
 import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
-import { Bell, Menu, Moon, Square, Sun } from 'lucide-react'
+import { Bell, CogIcon, Menu, Moon, Square, Sun, Users2 } from 'lucide-react'
 import {
     Sheet,
     SheetContent,
@@ -24,8 +24,8 @@ const menus: MenusInterface[] = [
     {
         title: "Site Management",
         routes: [
-            { icon: Square, title: "Settings", link: ADMIN_SETTINGS_URL },
-            { icon: Square, title: "Admins Management", link: ADMIN_SETTINGS_URL },
+            { icon: CogIcon, title: "Settings", link: ADMIN_SETTINGS_URL },
+            { icon: Users2, title: "Admins Management", link: ADMIN_ADMINS_URL },
             { icon: Square, title: "Clients", link: ADMIN_SETTINGS_URL },
             { icon: Square, title: "Some", link: ADMIN_SETTINGS_URL },
         ],
