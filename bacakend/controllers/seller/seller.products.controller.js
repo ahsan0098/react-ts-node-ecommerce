@@ -108,7 +108,7 @@ export const update = async (req, res) => {
     const data = req.body;
     const validator = {};
 
-    if (!data.name) validator.name = "name field is required";
+    // if (!data.name) validator.name = "name field is required";
     if (!data.price) validator.price = "price field is required";
     if (!data.description) validator.description = "description field is required";
     if (!data.category) validator.category = "category field is required";

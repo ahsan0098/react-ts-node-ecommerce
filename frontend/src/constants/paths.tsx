@@ -1,6 +1,7 @@
 /*===========*****===========global urls===========*****===========*/
 export const APP_URL = "http://localhost:5173/";
 export const SERVER_PATH = "http://localhost:3000/";
+export const GQL_PATH = "http://localhost:4040"
 export const API_URL = SERVER_PATH + "api/v1";
 /*===========*****===========global urls===========*****===========*/
 

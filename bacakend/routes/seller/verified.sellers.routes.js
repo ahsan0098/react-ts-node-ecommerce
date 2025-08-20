@@ -1,6 +1,7 @@
 /*===========*****===========imports===========*****===========*/
 import express from "express"
-import * as products from "../../controllers/seller/seller.products.controller.js"
+import * as products from "../../controllers/seller/seller.products.controller.js";
+import fileUpload from "express-fileupload";
 /*===========*****===========imports===========*****===========*/
 
 
@@ -16,7 +17,7 @@ router.post("/products/create", products.create);
 
 router.get("/products/:_id/get", products.single);
 
-router.put("/products/:_id/update", products.update);
+router.put("/products/:_id/update",fileUpload(), products.update);
 
 router.delete("/products/:_id/delete", products.remove);
 /*===========*****===========products routes===========*****===========*/

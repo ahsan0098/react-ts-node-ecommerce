@@ -40,7 +40,7 @@ const _schema = new mongoose.Schema(
         },
 
     },
-    { timeseries: true }
+    { timestamps: true }
 );
 /*===========*****===========schema===========*****===========*/
 

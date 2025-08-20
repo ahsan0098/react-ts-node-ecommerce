@@ -7,7 +7,7 @@ import { AxiosInstance } from "@/lib/axios.helper";
 import HookFormInput from "@/components/custome/form/HookFormInput";
 import { Loader2 } from "lucide-react";
 import HookFormFile from "@/components/custome/form/HookFormFile";
-import { ADMIN_PROFILE_URL, SERVER_PATH } from "@/constants/paths";
+import { ADMIN_ADMINS_URL, ADMIN_PROFILE_URL, SERVER_PATH } from "@/constants/paths";
 import InputLabelSkeleton from "@/components/custome/skeletons/InputLabelSkeleton";
 import LineSkeleton from "@/components/custome/skeletons/LineSkeleton";
 import Breadcrumbs from "@/components/custome/Breadcrumbs";
@@ -94,7 +94,7 @@ const UpdateAdmin = () => {
 
     return (
         <>
-            <Breadcrumbs pages={{ "Update Your Profile": "#" }} />
+            <Breadcrumbs pages={{ "Admins": ADMIN_ADMINS_URL, "Update Site Admin": "#" }} />
             <div className="max-w-3xl mx-auto w-full py-10 px-4 space-y-8">
 
                 <FormProvider {...form}>

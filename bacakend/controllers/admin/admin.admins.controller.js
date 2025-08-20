@@ -21,7 +21,7 @@ export const all = async (req, res) => {
     ret.total = admins.length;
 
     const settings = await getSettings();
-    const limit = 1
+    const limit = Number(settings.general.pagination);
     const skip = (Number(page) - 1) * limit;
 
     admins = admins.slice(skip, skip + limit);

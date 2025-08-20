@@ -5,7 +5,7 @@ interface TdProps extends TableHTMLAttributes<HTMLTableDataCellElement> {
 }
 const Td = ({ children }: TdProps) => {
     return (
-        <td scope="col" className="px-6 py-3">
+        <td scope="col" className="px-6 py-3 text-gray-900">
             {children}
         </td>
     )
